@@ -1,30 +1,31 @@
 package se.kth.csc.iprog.dinnerplanner.swing.view;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
-
+import javax.swing.JSeparator;
 import se.kth.csc.iprog.dinnerplanner.model.DinnerModel;
 
 
 public class MainView extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	
-	// The components of our view
-	JLabel label = new JLabel();
-	JButton plusButton = new JButton();
-	JButton minusButton = new JButton();
-	
-	public MainView(){
-
-		label.setText("Hello world");
+    
+	public MainView(DinnerModel model){
+		Dimension dimension = new Dimension(855, 400);
 		
-		// Add label to the view
-		this.add(label);
+		setLayout(new FlowLayout());
+		setPreferredSize(dimension);
 		
+		ContentView contentView = new ContentView(model);
+		SelectionView selectionView = new SelectionView(model);
+		JSeparator separator = new JSeparator();
 		
-		// Setup the rest of the view layout
-	}
-	
+		separator.setOrientation(JSeparator.NORTH);
+		separator.setPreferredSize(new Dimension(1, 390));
+		
+		this.add(contentView);		
+		this.add(separator);
+		this.add(selectionView);
+	}	
 }
