@@ -4,22 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DinnerModel {
-	
 
-	Set<Dish> dishes = new HashSet<Dish>();
-	
-	/**
-	 * TODO: For Lab2 you need to implement the IDinnerModel interface.
-	 * When you do this you will have all the needed fields and methods
-	 * for the dinner planner (number of guests, selected dishes, etc.). 
-	 */
-	
-	
+	public Set<Dish> dishes = new HashSet<Dish>();
+	// Array of selected dishes.
+	private Set<Dish> dishSelection = new HashSet<Dish>(3);
+	// Number of guests.
+	public int numberOfGuests;
+
 	/**
 	 * The constructor of the overall model. Set the default values here
 	 */
 	public DinnerModel(){
-		
 		//Adding some example data, you can add more
 		Dish dish1 = new Dish("French toast",Dish.STARTER,"toast.jpg","In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.");
 		Ingredient dish1ing1 = new Ingredient("eggs",0.5,"",1);
@@ -95,6 +90,60 @@ public class DinnerModel {
 		return result;
 	}
 	
+	/**
+	 * Returns the number of guests.
+	 */
+	public int getNumberOfGuests() {
+		return numberOfGuests;
+	}
+	/**
+	 * Sets the number of guests.
+	 */
+	public void setNumberOfGuests(int numberOfGuests) {
+		this.numberOfGuests = numberOfGuests;		
+	}
 	
-
+	/**
+	 * Returns the dish that is on the menu for selected type (1 = starter, 2 = main, 3 = desert).
+	 */
+	public Dish getSelectedDish(int type) {
+		Dish s = null;
+		for (Dish d : dishSelection) {
+			if (d.getType() == type) {
+				break;
+			}
+		}
+		return s;
+	}
+	
+	/**
+	 * Returns all the dishes on the menu.
+	 */
+	public Set<Dish> getFullMenu(){
+		return dishSelection;		
+	}
+	
+	/**
+	 * Returns all ingredients for all the dishes on the menu.
+	 */
+	public Set<Ingredient> getAllIngredients() {
+		Set<Ingredient> ret = new HashSet<Ingredient>();
+		for (Dish d : dishSelection) {
+			for (Ingredient i : d.ingredients) {
+				ret.add(i);
+			}
+		}
+		return ret;
+	}
+	
+	/**
+	 * Returns the total price of the menu (all the ingredients multiplied by number of guests).
+	 */
+	public float getTotalMenuPrice() {
+		int totalPrice = 0;
+		for (Ingredient ingredient : getAllIngredients()) {
+			totalPrice += ingredient.price;
+		}
+		return totalPrice * numberOfGuests;
+	}
 }
