@@ -36,7 +36,7 @@ public class DishesView extends JPanel {
 
 		searchInput = new JTextField();
 		searchInput.setText("search");
-		searchInput.setColumns(20);
+		searchInput.setPreferredSize(new Dimension(200, 24));
 		searchBarPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		searchBarPanel.setPreferredSize(searchBarDimension);
 		searchBarPanel.add(searchInput);
