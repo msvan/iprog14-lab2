@@ -71,5 +71,15 @@ public class Dish {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Returns the total price for the dish.
+	 */
+	public float getTotalPrice() {
+		int totalPrice = 0;
+		for (Ingredient ingredient : ingredients) {
+			totalPrice += ingredient.price;
+		}
+		return totalPrice;
+	}
 }

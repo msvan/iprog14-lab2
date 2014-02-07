@@ -5,8 +5,12 @@ import java.util.Set;
 
 public class DinnerModel {
 
+	// Dish types.
+	static public final String[] dishTypes = new String[] { "Starter", "Main", "Desert" };
+
+	// Set of all dishes.
 	public Set<Dish> dishes = new HashSet<Dish>();
-	// Array of selected dishes.
+	// Set of selected dishes.
 	private Set<Dish> dishSelection = new HashSet<Dish>();
 	// Number of guests.
 	public int numberOfGuests;
@@ -69,6 +73,7 @@ public class DinnerModel {
 
 		dishSelection.add(dish2);
 		
+		setNumberOfGuests(3);		
 	}
 	
 	/**
@@ -160,5 +165,12 @@ public class DinnerModel {
 			totalPrice += ingredient.price;
 		}
 		return totalPrice * numberOfGuests;
+	}
+	
+	/**
+	 * Returns the corresponding string for dish type.
+	 */
+	static public String getDishType(int idx) {
+		return dishTypes[idx - 1];
 	}
 }

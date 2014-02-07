@@ -2,9 +2,12 @@ package se.kth.csc.iprog.dinnerplanner.swing.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+
 import se.kth.csc.iprog.dinnerplanner.model.DinnerModel;
+import se.kth.csc.iprog.dinnerplanner.swing.controller.SelectionViewController;
 
 public class MainView extends JPanel {
 
@@ -16,22 +19,27 @@ public class MainView extends JPanel {
 		setLayout(new FlowLayout());
 		setPreferredSize(dimension);
 
+		// Create main views.
 		ContentView contentView = new ContentView(model);
 		JSeparator separator = new JSeparator();
-		SelectionView selectionView = new SelectionView(model);
-
 		separator.setOrientation(JSeparator.NORTH);
-		separator.setPreferredSize(new Dimension(1, 390));
+		separator.setPreferredSize(new Dimension(1, 390));		
+		SelectionView selectionView = new SelectionView(model);
+		
+		// Hookup controllers.
+		new SelectionViewController(model, selectionView);
 
+		// Pseudo margins.
 		JPanel b = new JPanel(new FlowLayout());
 		b.setPreferredSize(new Dimension(5, 1));
 		JPanel b2 = new JPanel(new FlowLayout());
 		b2.setPreferredSize(new Dimension(5, 1));
 
-		this.add(contentView);
-		this.add(b);
-		this.add(separator);
-		this.add(b2);
-		this.add(selectionView);
+		// Insert views.
+		add(contentView);
+		add(b);
+		add(separator);
+		add(b2);
+		add(selectionView);
 	}
 }
